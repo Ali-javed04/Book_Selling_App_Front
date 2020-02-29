@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#fff"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".Activities.CreateAccount">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/app_icon"
+                app:civ_border_width="0dp" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="wrap_content" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="7.7"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#00BFA5"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:text="@string/app_name"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_gravity="start"
+                android:layout_marginLeft="2dp"
+                android:textColor="#B36FCE"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:text="store of book"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Create Student Account"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_border"
+            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="3dp"
+            android:layout_height="wrap_content">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:id="@+id/full_name"
+                android:background="@drawable/bg_border"
+                android:layout_height="wrap_content"
+                android:hint="Full Name"
+                app:met_floatingLabel="highlight"
+                app:met_hideUnderline="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_border"
+            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="3dp"
+            android:layout_height="wrap_content">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:id="@+id/address"
+                android:layout_height="wrap_content"
+                app:met_hideUnderline="true"
+                android:hint="City" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_border"
+            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="3dp"
+            android:layout_height="wrap_content">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:id="@+id/phonenumber"
+                android:inputType="phone"
+                android:layout_height="wrap_content"
+                app:met_hideUnderline="true"
+                android:hint="Phone Number" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_border"
+            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="3dp"
+            android:layout_height="wrap_content">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:id="@+id/email"
+                android:layout_height="wrap_content"
+                app:met_hideUnderline="true"
+                android:hint="Email Address" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_border"
+            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="3dp"
+            android:layout_height="wrap_content">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:id="@+id/password"
+                app:met_hideUnderline="true"
+                android:layout_height="wrap_content"
+                android:hint="Password" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:onClick="create_account_click"
+            android:layout_height="wrap_content"
+            android:background="@drawable/filled_green"
+            android:text="Create Account" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

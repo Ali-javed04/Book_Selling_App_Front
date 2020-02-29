@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Book Selling App</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="categories">
+        <item>MATRIC</item>
+        <item>FSC</item>
+        <item>BS</item>
+        <item>MS</item>
+        <item>PHD</item>
+        <item>DIPLOMA</item>
+        <item>Medical</item>
+        <item>Engineering</item>
+        <item>Arts</item>
+        <item>Science</item>
+        <item>Cooking</item>
+        <item>Religion</item>
+        <item>Others</item>
+    </string-array>
+
+</resources>
