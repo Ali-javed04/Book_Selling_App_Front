@@ -37,18 +37,7 @@ class LoginActivity : AppCompatActivity() {
         progressDialog = ProgressDialog(this)
         progressDialog.setCancelable(false)
 
-        if (PreferenceManager.getInstance(applicationContext)!!.isUserActive()) {
-            if (PreferenceManager.getInstance(applicationContext)!!.getAccountStatus()!!.trim().equals(
-                    "unverified"
-                )
-            ) {
-                var intent = Intent(this, VerificationActivity::class.java)
-                var pack = Bundle()
-                pack.putString("state", "loggeg_in")
-                intent.putExtras(pack)
-                startActivity(intent)
-                finish()
-            } else {
+
                 if (PreferenceManager.getInstance(applicationContext)!!.getUserAccountType()!!.trim().equals(
                         Constants.SELLER
                     )
@@ -56,99 +45,8 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(Intent(this, AddSubject::class.java))
                 }
 
-            }
-
-
-        }
     }
 
-             fun openapplication(emailStr: String, passwordStr: String) {
-
-                progressDialog.setMessage("checking account")
-                progressDialog.show()
-
-
-
-                var request = object : StringRequest(
-                    Request.Method.POST, URLs.LOGIN,
-                    Response.Listener { response ->
-
-
-                        try {
-
-                            if (progressDialog != null && progressDialog.isShowing()) {
-                                progressDialog.dismiss()
-                            }
-
-                            var mainOb = JSONObject(response)
-                            var message = mainOb.getString("message")
-                            val error = mainOb.getBoolean("error")
-
-                            if (error) {
-                                // error
-                                Dialogs.showMessage(this, message, "OK", object : AlertDialogInterface {
-                                    override fun positiveButtonClick(dialogInterface: DialogInterface) {
-                                        dialogInterface.dismiss()
-                                    }
-
-                                    override fun negativeButtonClick(dialogInterface: DialogInterface) {
-                                    }
-                                })
-                            } else {
-                                var userOb = mainOb.getJSONObject("user")
-
-                                PreferenceManager.getInstance(applicationContext)!!.setActiveUser()
-                                PreferenceManager.getInstance(applicationContext)!!
-                                    .setUserId(userOb.getInt("ID"))
-                                PreferenceManager.getInstance(applicationContext)!!
-                                    .setUserName(userOb.getString("name"))
-                                PreferenceManager.getInstance(applicationContext)!!
-                                    .setUserAddress(userOb.getString("address"))
-                                PreferenceManager.getInstance(applicationContext)!!
-                                    .setUserPhone(userOb.getString("phone_number"))
-                                PreferenceManager.getInstance(applicationContext)!!
-                                    .setUserEmail(userOb.getString("email_address"))
-                                PreferenceManager.getInstance(applicationContext)!!
-                                    .setUserPassword(userOb.getString("password"))
-                                PreferenceManager.getInstance(applicationContext)!!
-                                    .setUserProfile(userOb.getString("profile_addresss"))
-                                PreferenceManager.getInstance(applicationContext)!!
-                                    .setAccountStatus(userOb.getString("status"))
-
-
-
-                                        startActivity(Intent(this, MainActivity::class.java))
-
-                                    finish()
-
-                            }
-                        } catch (e: Exception) {
-                            Log.i(TAG, "exception : " + e);
-                            Dialogs.showMessage(this, Constants.error_message_exception)
-                        }
-
-
-                    },
-                    Response.ErrorListener { error ->
-                        if (progressDialog != null && progressDialog.isShowing()) {
-                            progressDialog.dismiss()
-                        }
-                        Log.i(TAG, "error : " + error);
-                        Dialogs.showMessage(this, Constants.error_message_volley)
-                    }) {
-                    override fun getParams(): MutableMap<String, String> {
-                        var map = HashMap<String, String>()
-                        map["email"] = emailStr
-                        map["password"] = passwordStr
-                        return map
-                    }
-                }
-
-                RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
-
-
-
-        }
 
         fun login(view: View) {
 
@@ -174,6 +72,93 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
+    private  fun openapplication(emailStr: String, passwordStr: String) {
+
+        progressDialog.setMessage("checking account")
+        progressDialog.show()
+
+
+
+        var request = object : StringRequest(
+            Request.Method.POST, URLs.LOGIN,
+            Response.Listener { response ->
+
+
+                try {
+
+                    if (progressDialog != null && progressDialog.isShowing()) {
+                        progressDialog.dismiss()
+                    }
+
+                    var mainOb = JSONObject(response)
+                    var message = mainOb.getString("message")
+                    val error = mainOb.getBoolean("error")
+
+                    if (error) {
+                        // error
+                        Dialogs.showMessage(this, message, "OK", object : AlertDialogInterface {
+                            override fun positiveButtonClick(dialogInterface: DialogInterface) {
+                                dialogInterface.dismiss()
+                            }
+
+                            override fun negativeButtonClick(dialogInterface: DialogInterface) {
+                            }
+                        })
+                    } else {
+                        var userOb = mainOb.getJSONObject("user")
+
+                        PreferenceManager.getInstance(applicationContext)!!.setActiveUser()
+                        PreferenceManager.getInstance(applicationContext)!!
+                            .setUserId(userOb.getInt("ID"))
+                        PreferenceManager.getInstance(applicationContext)!!
+                            .setUserName(userOb.getString("name"))
+                        PreferenceManager.getInstance(applicationContext)!!
+                            .setUserAddress(userOb.getString("address"))
+                        PreferenceManager.getInstance(applicationContext)!!
+                            .setUserPhone(userOb.getString("phone_number"))
+                        PreferenceManager.getInstance(applicationContext)!!
+                            .setUserEmail(userOb.getString("email_address"))
+                        PreferenceManager.getInstance(applicationContext)!!
+                            .setUserPassword(userOb.getString("password"))
+                        PreferenceManager.getInstance(applicationContext)!!
+                            .setUserProfile(userOb.getString("profile_addresss"))
+                        PreferenceManager.getInstance(applicationContext)!!
+                            .setAccountStatus(userOb.getString("status"))
+
+
+                        if (PreferenceManager.getInstance(applicationContext)!!.getUserAccountType()!!.trim().equals(
+                                Constants.SELLER)) {
+                            startActivity(Intent(this, AddSubject::class.java))
+                        }
+                        finish()
+                    }
+                } catch (e: Exception) {
+                    Log.i(TAG, "exception : " + e);
+                    Dialogs.showMessage(this, Constants.error_message_exception)
+                }
+
+
+            },
+            Response.ErrorListener { error ->
+                if (progressDialog != null && progressDialog.isShowing()) {
+                    progressDialog.dismiss()
+                }
+                Log.i(TAG, "error : " + error);
+                Dialogs.showMessage(this, Constants.error_message_volley)
+            }) {
+            override fun getParams(): MutableMap<String, String> {
+                var map = HashMap<String, String>()
+                map["email"] = emailStr
+                map["password"] = passwordStr
+                return map
+            }
+        }
+
+        RequestHandler.getInstance(applicationContext)!!.addToRequestQueue(request)
+
+
+
+    }
 
 
 
@@ -183,6 +168,7 @@ class LoginActivity : AppCompatActivity() {
         startActivity(Intent(applicationContext, CreateAccount::class.java))
 
 
-    }}
+    }
+}
 
 

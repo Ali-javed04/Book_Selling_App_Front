@@ -2,8 +2,8 @@ package aust.fyp.learn.and.booksellingapp.StoreRoom
 
 object URLs {
 
-    val IP_ADDRESS = "192.168.43.169"
-    val PORT = "3012"
+    val IP_ADDRESS = "192.168.43.169:"
+    val PORT = "3306"
     val PROTOCOL = "http://"
 
     // users

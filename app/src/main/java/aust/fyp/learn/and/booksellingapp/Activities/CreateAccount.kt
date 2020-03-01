@@ -96,7 +96,7 @@ class CreateAccount : AppCompatActivity() {
                 email_str,
                 password_str,
                 phonenumber_str
-            );
+            )
         }
 
 
@@ -107,7 +107,7 @@ class CreateAccount : AppCompatActivity() {
         addressStr: String,
         emailStr: String,
         passwordStr: String,
-        phonenumber_str: String
+        phonenumberstr: String
     ) {
 
         progressDialog.setMessage("Please wait - creating account")
@@ -155,14 +155,14 @@ class CreateAccount : AppCompatActivity() {
                             .setUserProfile(userOb.getString("profile_addresss"))
                         PreferenceManager.getInstance(applicationContext)!!
                             .setAccountStatus(userOb.getString("status"))
-
-                        var intent = Intent(this, VerificationActivity::class.java)
-                        var pack = Bundle()
-                        pack.putString("state", "loggeg_in")
-                        intent.putExtras(pack)
-                        startActivity(intent)
-                        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                        if (PreferenceManager.getInstance(applicationContext)!!.getUserAccountType()!!.trim().equals(
+                                Constants.SELLER
+                            )
+                        ) {
+                            startActivity(Intent(this, AddSubject::class.java))
+                        }
                         finish()
+
                     }
                 } catch (e: Exception) {
                     Log.i(CreateAccount.TAG, "Exception : " + e);
@@ -182,7 +182,7 @@ class CreateAccount : AppCompatActivity() {
                 map["name"] = fullNameStr
                 map["address"] = addressStr
                 map["email"] = emailStr
-                map["phone_number"] = phonenumber_str
+                map["phone_number"] = phonenumberstr
                 map["password"] = passwordStr
                 map["type"] = "seller"
 
